@@ -1,27 +1,32 @@
 *** Settings ***
-Library    Process
-Library    SerialLibrary
-Library    BluetoothTesting.py
+Library    Process    #built-in library
+Library    SerialLibrary    #external 3rd-party library
+Library    BluetoothTesting.py    #custom library
 
 Test Setup    Run Keywords
 ...           Open Serial Port
 
 Test Teardown    Delete All Ports
 
+*** Variables ***
+${char_uuid}    ece27bad-3d4b-4072-8494-76a551f0b6cc        #BLE characteristic UUID
+${ble_mac}    f0:08:d1:d5:0c:ae      #BLE device access address
+${esp32_dev_path}    /dev/ttyUSB0    #dev path for serial communication
+
 *** Test Cases ***
 
-Check LED Can Turn Off
+Test LED Switch Off
     Turn LED Off
     ${led_state_gpio}=    Get LED State
     Should Be Equal As Integers    ${led_state_gpio}    0
-    ${led_state_ble}=    Read Char Value
+    ${led_state_ble}=    Read Char Value    ${ble_mac}    ${char_uuid}
     Should Be Equal As Integers    ${led_state_ble}    0
 
-Check LED Can Turn On
+Test LED Switch On
     Turn LED On
     ${led_state_gpio}=    Get LED State
     Should Be Equal As Integers    ${led_state_gpio}    1
-    ${led_state_ble}=    Read Char Value
+    ${led_state_ble}=    Read Char Value    ${ble_mac}    ${char_uuid}
     Should Be Equal As Integers    ${led_state_ble}    1
 
 *** Keywords ***
@@ -37,7 +42,7 @@ Get LED State
     [Return]    ${result.stdout}
 
 Open Serial Port
-    Add Port   /dev/ttyUSB0
+    Add Port   ${esp32_dev_path}
     ...        baudrate=115200
     ...        bytesize=8
     ...        parity=N
