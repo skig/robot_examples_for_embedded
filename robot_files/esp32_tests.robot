@@ -1,6 +1,7 @@
 *** Settings ***
 Library    Process
 Library    SerialLibrary
+Library    BluetoothTesting.py
 
 Test Setup    Run Keywords
 ...           Open Serial Port
@@ -11,13 +12,17 @@ Test Teardown    Delete All Ports
 
 Check LED Can Turn Off
     Turn LED Off
-    ${led_state}=    Get LED State
-    Should Be Equal As Integers    ${led_state}    0
+    ${led_state_gpio}=    Get LED State
+    Should Be Equal As Integers    ${led_state_gpio}    0
+    ${led_state_ble}=    Read Char Value
+    Should Be Equal As Integers    ${led_state_ble}    0
 
 Check LED Can Turn On
     Turn LED On
-    ${led_state}=    Get LED State
-    Should Be Equal As Integers    ${led_state}    1
+    ${led_state_gpio}=    Get LED State
+    Should Be Equal As Integers    ${led_state_gpio}    1
+    ${led_state_ble}=    Read Char Value
+    Should Be Equal As Integers    ${led_state_ble}    1
 
 *** Keywords ***
 Turn LED On
