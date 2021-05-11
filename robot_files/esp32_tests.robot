@@ -15,19 +15,29 @@ ${esp32_dev_path}    /dev/ttyUSB0    #dev path for serial communication
 
 *** Test Cases ***
 
-Test LED Switch Off
-    Turn LED Off
-    ${led_state_gpio}=    Get LED State
-    Should Be Equal As Integers    ${led_state_gpio}    0
-    ${led_state_ble}=    Read Char Value    ${ble_mac}    ${char_uuid}
-    Should Be Equal As Integers    ${led_state_ble}    0
-
-Test LED Switch On
+Test LED Switch On Via GPIO
+    [Tags]    GPIO
     Turn LED On
     ${led_state_gpio}=    Get LED State
     Should Be Equal As Integers    ${led_state_gpio}    1
+
+Test LED Switch Off Via GPIO
+    [Tags]    GPIO
+    Turn LED Off
+    ${led_state_gpio}=    Get LED State
+    Should Be Equal As Integers    ${led_state_gpio}    0
+
+Test LED Switch On Via BLE
+    [Tags]    BLE
+    Turn LED On
     ${led_state_ble}=    Read Char Value    ${ble_mac}    ${char_uuid}
     Should Be Equal As Integers    ${led_state_ble}    1
+
+Test LED Switch Off Via BLE
+    [Tags]    BLE
+    Turn LED Off
+    ${led_state_ble}=    Read Char Value    ${ble_mac}    ${char_uuid}
+    Should Be Equal As Integers    ${led_state_ble}    0
 
 *** Keywords ***
 Turn LED On
