@@ -4,6 +4,11 @@ Robot Framework (далее - RF) - инструмент для автомати
 
 ## Установка RF
 
+В данной статье используются пакеты robotframework, robotframework-seriallibrary и pygatt. Для установки введите команду 
+```
+pip3 install robotframework robotframework-seriallibrary pygatt
+```
+
 ## Подключаем тестируемое устройство
 
 В качестве примера тестирования устройств с помощью RF рассмотрим простой девайс, реализованный на отладочной плате ESP32S.
@@ -23,26 +28,44 @@ Robot Framework (далее - RF) - инструмент для автомати
 Для знакомства с синтаксисом RF напишем простой тест.
 
 ```
-*** Variables ***
-${MESSAGE}        Hello, world!
+*** Settings ***
+Suite Setup    Log    Suite setup           # Запускается перед тест-сьютом
+Suite Teardown    Log    Suite teardown     # Запускается после тест-сьюта
+Test Setup    Log    Test setup             # Запускается перед тест-кейсом
+Test Teardown    Log    Test teardown       # Запускается после тест-кейса
 
 *** Test Cases ***
-My Test
-    [Documentation]    Example test.
-    Log    ${MESSAGE}
+Test Case Pass Example    # Пример успешного тест-кейса
+    ${hello_world}=    Set Variable    Hello    # Встроенное ключевое слово Set Variable для создания переменной
+    ${hello_world}=    Add Word To String  ${hello_world}  world    # Кастомное ключевое слово для добавления слова к строке
+    Should Be Equal As Strings  ${hello_world}    Hello world    # Сравнение строк, в данном случае возвращает Pass
 
-Another Test
-    Should Be Equal    ${MESSAGE}    Hello, world!
+Test Case Fail Example    # Пример зафейленного тест-кейса
+    ${hello_world}=    Set Variable    Goodbye
+    ${hello_world}=    Add Word To String  ${hello_world}  world
+    Should Be Equal As Strings  ${hello_world}    Hello world    # Сравнение строк, в данном случае возвращает Fail
+
+*** Keywords ***
+Add Word To String    # Кастомное ключевое слово
+    [Arguments]    ${string}    ${word}    # Принимает на входе два аргумента
+    ${string}=  Catenate    ${string}   ${word}    # Встроенное ключевое слово для соединения строк
+    [Return]    ${string}    # Возвращает строку с добавленным словом
 ```
 
 В разделе Variables задаются переменные, в разделе Test Cases сценарии тестов. В тест-кейсах можно использовать встроенные ключевые слова, либо ключевые слова из библиотек. Полный список встроенных ключевых слов можно найти [здесь](https://robotframework.org/robotframework/latest/libraries/BuiltIn.html)
 
-Сохраним тест в файл test_example.robot и запустим его с помощью команды
+Сохраним тест в файл simple_test.robot и запустим его с помощью команды
 ```
-> robot test_example.robot
+> robot simple_test.robot
 ```
 
+<img src="../pics/simple_test_console.png" width="400"/>
+
 В результате сгенерируется отчёт и лог-файл теста.
+
+Лог-файл:
+
+<img src="../pics/simple_test_log.png" width="400"/>
 
 ## Использование библиотек
 
