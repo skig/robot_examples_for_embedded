@@ -2,8 +2,8 @@
 Example of robotframework test-suite for the simple ESP32 project. It contains example of test-suite for controlling ESP32 LED using serial port command, and checking LED status using RPi GPIO pin reading and dedicated BLE characteristic value reading.
 
 Hardware requirements:
-- Raspberry PI 4B
-- ESP32S Dev1 Board
+- Raspberry Pi 4B
+- ESP32S Devkit V1 board
 
 Software requirements:
 - robotframework
@@ -14,8 +14,7 @@ Software requirements:
 
 The following packages should be installed on Raspberry PI:
 ```console
-pi@raspberrypi: pip3 install robotframework
-pi@raspberrypi: pip3 install robotframework-seriallibrary
+pi@raspberrypi: pip3 install robotframework robotframework-seriallibrary pygatt
 pi@raspberrypi: sudo apt install wiringpi
 ```
 
