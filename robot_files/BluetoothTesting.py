@@ -1,9 +1,7 @@
 import pygatt.backends
 
 class BluetoothTesting:
- 
-    ROBOT_LIBRARY_SCOPE = 'GLOBAL'
-    
+   
     def read_char_value(self, mac, char_uuid):
         adapter = pygatt.backends.GATTToolBackend()
         try:
