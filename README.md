@@ -1,5 +1,5 @@
-# robot_examples_for_embedded
-Example of robotframework test-suite for the simple ESP32 project. It contains example of test-suite for controlling ESP32 LED using serial port command, and checking LED status using RPi GPIO pin reading and dedicated BLE characteristic value reading. Also this repository contains a [short article in Russian](habr_post/) about using RobotFramework for embedded testing
+# example of embedded project testing using RobotFramework
+Example of RobotFramework test-suite for the simple ESP32 project. It contains example of test-suite for controlling ESP32 LED using serial port command, and checking LED status using RPi GPIO pin reading and dedicated BLE characteristic value reading. Also this repository contains a [short article in Russian](habr_post/) about using RobotFramework for embedded testing
 
 Hardware requirements:
 - Raspberry Pi 4B
