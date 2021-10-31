@@ -1,5 +1,5 @@
 # robot_examples_for_embedded
-Example of robotframework test-suite for the simple ESP32 project. It contains example of test-suite for controlling ESP32 LED using serial port command, and checking LED status using RPi GPIO pin reading and dedicated BLE characteristic value reading.
+Example of robotframework test-suite for the simple ESP32 project. It contains example of test-suite for controlling ESP32 LED using serial port command, and checking LED status using RPi GPIO pin reading and dedicated BLE characteristic value reading. Also this repository contains a [short article in Russian](habr_post/) about using RobotFramework for embedded testing
 
 Hardware requirements:
 - Raspberry Pi 4B
@@ -39,16 +39,12 @@ pi@raspberrypi:~/Documents/robot_examples_for_embedded $ robot robot_files/esp32
 ==============================================================================
 Esp32 Tests                                                                   
 ==============================================================================
-Test LED Switch On With GPIO                                          | PASS |
+Test LED Switch Off                                                   | PASS |
 ------------------------------------------------------------------------------
-Test LED Switch Off With GPIO                                         | PASS |
-------------------------------------------------------------------------------
-Test LED Switch On With BLE                                           | PASS |
-------------------------------------------------------------------------------
-Test LED Switch Off With BLE                                          | PASS |
+Test LED Switch On                                                    | PASS |
 ------------------------------------------------------------------------------
 Esp32 Tests                                                           | PASS |
-4 tests, 4 passed, 0 failed
+2 tests, 2 passed, 0 failed
 ==============================================================================
 Output:  /home/pi/Documents/robot_examples_for_embedded/output.xml
 Log:     /home/pi/Documents/robot_examples_for_embedded/log.html
